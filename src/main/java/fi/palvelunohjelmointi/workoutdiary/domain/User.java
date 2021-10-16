@@ -1,10 +1,16 @@
-package fi.palvelunohjelmointi.exercisediary.domain;
+package fi.palvelunohjelmointi.workoutdiary.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -12,6 +18,9 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	private List<Entry> entries;
 	
 	// Username with unique constraint
 	@Column(name = "username", nullable = false, unique = true)

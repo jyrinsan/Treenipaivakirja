@@ -1,0 +1,43 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Workout diary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Edit workout</h1>
+	<div>
+		<form th:object="${workout}" th:action="@{../saveWorkout}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			
+			<div class="row form-group">
+				<div class="col-md-1">
+			  		<label for="name" class="form-label">Name</label>
+			  	</div>
+			  	<div class="col-md-3">
+					<input type="text" class="form-control" id="name" th:field="*{name}" />
+			  	</div>
+			</div>
+			<br/>
+			<div class="row form-group">
+				<div class="col-md-1">
+			  		<label for="year" class="form-label">Movements</label>
+			  	</div>
+			  	<div class="col-md-3">
+					<select class="form-control" th:field="*{movements}" multiple="multiple">
+					    <option th:each="movement : ${movements}"
+					            th:field="*{movements}"
+					            th:value="${movement.id}"
+					            th:text="${movement.name}">Part name</option>
+					</select>
+			  	</div>
+			</div>
+			<br/>
+			<input class="btn btn-success" type="submit" value="Save"></input>			
+			<a class="btn btn-success" href="/workoutlist">Cancel</a>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.exercisediary.domain;
+package fi.palvelunohjelmointi.workoutdiary.domain;
 
 import java.util.List;
 

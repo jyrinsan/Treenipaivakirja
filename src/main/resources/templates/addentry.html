@@ -1,0 +1,50 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Workout diary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Add entry</h1>
+	<div>
+		<form th:object="${entry}" th:action="@{../saveEntry}" action="#" method="post">
+			<input type="hidden" th:field="*{user}"/>
+			<div class="row form-group">
+				<div class="col-md-1">
+			  		<label for="name" class="form-label">Date</label>
+			  	</div>
+			  	<div class="col-md-3">
+					<input type="text" class="form-control" id="date" th:field="*{date}" />
+			  	</div>
+			</div>
+			<br/>
+			<div class="row form-group">
+				<div class="col-md-1">
+			  		<label for="name" class="form-label">Description</label>
+			  	</div>
+			  	<div class="col-md-3">
+					<input type="text" class="form-control" id="description" th:field="*{description}" />
+			  	</div>
+			</div>
+			<br/>
+			<div class="row form-group">
+				<div class="col-md-1">
+			  		<label for="year" class="form-label">Workout</label>
+			  	</div>
+			  	<div class="col-md-3">
+					<select class="form-control" th:field="*{workout}">
+			            <option th:each="workout : ${workouts}"
+			                    th:text="${workout.name}"
+			                    th:value="${workout.id}">
+					</select>
+			  	</div>
+			</div>
+			<br/>
+			<input class="btn btn-success" type="submit" value="Save"></input>		
+			<a class="btn btn-success" href="/entrylist">Cancel</a>			
+		</form>
+	</div>
+</body>
+</html>

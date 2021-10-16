@@ -2,14 +2,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Exercise diary</title>
+    <title>Workout diary</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Add exercise</h1>
+	<h1>Add movement</h1>
 	<div>
-		<form th:object="${exercise}" th:action="@{../save}" action="#" method="post">
+		<form th:object="${movement}" th:action="@{../saveMovement}" action="#" method="post">
 			<div class="row form-group">
 				<div class="col-md-1">
 			  		<label for="name" class="form-label">Name</label>
@@ -19,21 +19,8 @@
 			  	</div>
 			</div>
 			<br/>
-			<div class="row form-group">
-				<div class="col-md-1">
-			  		<label for="year" class="form-label">Movements</label>
-			  	</div>
-			  	<div class="col-md-3">
-					<select class="form-control" th:field="*{movements}" multiple="multiple">
-					    <option th:each="movement : ${movements}"
-					            th:field="*{movements}"
-					            th:value="${movement.id}"
-					            th:text="${movement.name}">Part name</option>
-					</select>
-			  	</div>
-			</div>
-			<br/>
 			<input class="btn btn-success" type="submit" value="Save"></input>			
+			<a class="btn btn-success" href="/movementlist">Cancel</a>	
 		</form>
 	</div>
 </body>

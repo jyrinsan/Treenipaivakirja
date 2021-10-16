@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Workout diary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">Navbar</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="/entrylist">Entries</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/workoutlist">Workouts</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="/movementlist">Movements</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<div class="col-md-4">
+		<h1>Entries</h1>
+	</div>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+    <table class="table" >
+		<tr>
+		    <th>Date</th>
+		    <th>Description</th>
+		    <th>Workout</th>
+		    <th>User</th>
+		    <th></th>
+		    <th></th>
+		</tr>  
+    	<tr th:each = "entry : ${entries}">
+    		<td th:text="${entry.date}"></td>
+    		<td th:text="${entry.description}"></td>
+    		<td th:text="${entry.workout.name}"></td>
+    		<td th:text="${entry.user.username}"></td>
+    		<td><a class="btn btn-danger" th:href="@{/deletEntry/{id}(id=${entry.id})}">Delete</a></td>
+    		<td><a class="btn btn-success" th:href="@{/editEntry/{id}(id=${entry.id})}">Edit</a></td>
+    	</tr>
+     </table>
+     <a class="btn btn-success" href="/addEntry">Add entry</a>
+</body>
+</html>

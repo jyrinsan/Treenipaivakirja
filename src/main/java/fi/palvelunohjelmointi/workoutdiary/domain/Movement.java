@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.exercisediary.domain;
+package fi.palvelunohjelmointi.workoutdiary.domain;
 
 import java.util.List;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class Movement {
 	private String name;
 
 	@ManyToMany(mappedBy = "movements")
-	private List<Exercise> exercises;
+	private List<Workout> workouts;
 	
 	public Movement() {
 		super();
@@ -47,11 +47,11 @@ public class Movement {
 		this.name = name;
 	}
 	
-	public List<Exercise> getExercises() {
-		return exercises;
+	public List<Workout> getWorkouts() {
+		return workouts;
 	}
-	public void setExercises(List<Exercise> exercises) {
-		this.exercises = exercises;
+	public void setWorkouts(List<Workout> workouts) {
+		this.workouts = workouts;
 	}
 	
 	public int getCount() {

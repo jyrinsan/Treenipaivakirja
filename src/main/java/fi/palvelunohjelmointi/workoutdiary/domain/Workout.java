@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.exercisediary.domain;
+package fi.palvelunohjelmointi.workoutdiary.domain;
 
 import java.util.List;
 
@@ -11,39 +11,42 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Exercise {
+public class Workout {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id; 
 	
 	private String name;
 	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="workout")
+	private List<Entry> entries;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Exercise_Movement",
-    joinColumns = {
-        @JoinColumn(
-            name = "exercise_id",
-            referencedColumnName = "id"
-        )
-    },
-    inverseJoinColumns = {
-        @JoinColumn(
-            name = "movement_id",
-            referencedColumnName = "id"
-        )
-    }
-)
+    @JoinTable(name = "Workout_Movement",
+	    joinColumns = {
+	        @JoinColumn(
+	            name = "workout_id",
+	            referencedColumnName = "id"
+	        )
+	    },
+	    inverseJoinColumns = {
+	        @JoinColumn(
+	            name = "movement_id",
+	            referencedColumnName = "id"
+	        )
+	    }
+    )
 	private List<Movement> movements;
 
-	public Exercise() {
+	public Workout() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Exercise(String name, List<Movement> movements) {
+	public Workout(String name, List<Movement> movements) {
 		super();
 		this.name = name;
 		this.movements = movements;
@@ -73,10 +76,17 @@ public class Exercise {
 		this.movements = movements;
 	}
 
-	@Override
-	public String toString() {
-		return "Exercise [id=" + id + ", name=" + name + ", movements=" + movements + "]";
+	public List<Entry> getEntries() {
+		return entries;
 	}
 
-	
+	public void setEntries(List<Entry> entries) {
+		this.entries = entries;
+	}
+
+	@Override
+	public String toString() {
+		return "Workout [id=" + id + ", name=" + name + ", movements=" + movements + "]";
+	}
+
 }

@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.exercisediary.web;
+package fi.palvelunohjelmointi.workoutdiary.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fi.palvelunohjelmointi.exercisediary.domain.User;
-import fi.palvelunohjelmointi.exercisediary.domain.UserRepository;
+import fi.palvelunohjelmointi.workoutdiary.domain.User;
+import fi.palvelunohjelmointi.workoutdiary.domain.UserRepository;
 
 /**
  * This class is used by spring security to authenticate and authorize user
