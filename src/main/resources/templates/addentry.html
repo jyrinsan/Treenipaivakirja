@@ -5,6 +5,7 @@
     <title>Workout diary</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="css/omattyylit.css" th:href="@{../css/omattyylit.css}" />
 </head>
 <body>
 	<h1>Add entry</h1>
@@ -16,7 +17,8 @@
 			  		<label for="name" class="form-label">Date</label>
 			  	</div>
 			  	<div class="col-md-3">
-					<input type="text" class="form-control" id="date" th:field="*{date}" />
+					<input type="text" class="form-contro" id="date" th:field="*{date}" />
+					<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error">Error</div>
 			  	</div>
 			</div>
 			<br/>
@@ -26,6 +28,7 @@
 			  	</div>
 			  	<div class="col-md-3">
 					<input type="text" class="form-control" id="description" th:field="*{description}" />
+					<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">Error</div>
 			  	</div>
 			</div>
 			<br/>
@@ -39,6 +42,7 @@
 			                    th:text="${workout.name}"
 			                    th:value="${workout.id}">
 					</select>
+					<div th:if="${#fields.hasErrors('workout')}" th:errors="*{workout}" class="error">Error</div>
 			  	</div>
 			</div>
 			<br/>

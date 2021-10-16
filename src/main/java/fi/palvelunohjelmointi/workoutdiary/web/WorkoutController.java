@@ -1,9 +1,12 @@
 package fi.palvelunohjelmointi.workoutdiary.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,6 @@ public class WorkoutController {
 	
 	@RequestMapping(value = "/workoutlist", method = RequestMethod.GET)
     public String workoutList(Model model) {	
-		System.out.println(workoutRepository.findAll());
         model.addAttribute("workouts", workoutRepository.findAll());
   
         return "workoutlist";
@@ -40,7 +42,11 @@ public class WorkoutController {
     
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("saveWorkout")
-	public String saveWorkout(Workout workout) {
+	public String saveWorkout(@Valid Workout workout, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("movements", movementRepository.findAll());
+			return "addWorkout";
+		}
 		workoutRepository.save(workout);
 		return "redirect:workoutlist";
 	}
@@ -53,5 +59,12 @@ public class WorkoutController {
     	model.addAttribute("movements", movementRepository.findAll());
         return "editworkout";
     } 
+	
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/deleteWorkout/{id}", method = RequestMethod.GET)
+    public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
+    	workoutRepository.deleteById(workoutId);
+        return "redirect:../workoutlist";
+    }   
 
 }

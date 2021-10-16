@@ -1,10 +1,13 @@
 package fi.palvelunohjelmointi.workoutdiary.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +32,9 @@ public class EntryController {
 	private UserRepository userRepository;
 	
 	@RequestMapping(value = "/entrylist", method = RequestMethod.GET)
-    public String entryList(Model model) {	
-        model.addAttribute("entries", entryRepository.findAll());
+    public String entryList(@AuthenticationPrincipal UserDetails userDetails, Model model) {	
+		User user = userRepository.findByUsername(userDetails.getUsername());
+        model.addAttribute("entries", entryRepository.findByUser(user));
   
         return "entrylist";
     }
@@ -46,7 +50,11 @@ public class EntryController {
     }   
     
 	@PostMapping("saveEntry")
-	public String saveEntry(Entry entry) {
+	public String saveEntry(@Valid Entry entry, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("workouts", workoutRepository.findAll());
+			return "addEntry";
+		}
 		entryRepository.save(entry);
 		return "redirect:entrylist";
 	}
@@ -60,5 +68,11 @@ public class EntryController {
         model.addAttribute("workouts", workoutRepository.findAll());
         return "editentry";
     } 
+    
+    @RequestMapping(value = "/deleteEntry/{id}", method = RequestMethod.GET)
+    public String deleteEntry(@PathVariable("id") Long entryId, Model model) {
+    	entryRepository.deleteById(entryId);
+        return "redirect:../entrylist";
+    }  
 
 }

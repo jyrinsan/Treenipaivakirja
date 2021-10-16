@@ -39,15 +39,17 @@
     <table class="table" >
 		<tr>
 		    <th>Name</th>
+		    <th>Count</th>
 		    <th></th>
 		    <th></th>
 		</tr>  
     	<tr th:each = "movement : ${movements}">
     		<td th:text="${movement.name}"></td>
-    		<td><a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:href="@{/deleteMovement/{id}(id=${movement.id})}">Delete</a></td>
-    		<td><a sec:authorize="hasRole('ADMIN')" class="btn btn-success" th:href="@{/editMovement/{id}(id=${movement.id})}">Edit</a></td>
+    		<td th:text="${movement.count}"></td>
+    		<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger" th:href="@{/deleteMovement/{id}(id=${movement.id})}">Delete</a></td>
+    		<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/editMovement/{id}(id=${movement.id})}">Edit</a></td>
     	</tr>
      </table>
-     <a sec:authorize="hasRole('ADMIN')" class="btn btn-success" href="/addMovement">Add movement</a>
+     <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/addMovement">Add movement</a>
 </body>
 </html>

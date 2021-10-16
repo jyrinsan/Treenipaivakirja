@@ -1,9 +1,12 @@
 package fi.palvelunohjelmointi.workoutdiary.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,10 @@ public class MovementController {
     
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("saveMovement")
-	public String saveMovement(Movement movement) {
+	public String saveMovement(@Valid Movement movement, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "addMovement";
+		}
 		movementRepository.save(movement);
 		return "redirect:movementlist";
 	}
@@ -47,5 +53,12 @@ public class MovementController {
     	model.addAttribute("movement", movement);
         return "editmovement";
     } 
+	
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/deleteMovement/{id}", method = RequestMethod.GET)
+    public String deleteMovement(@PathVariable("id") Long movementId, Model model) {
+    	movementRepository.deleteById(movementId);
+        return "redirect:../movementlist";
+    }   
 
 }

@@ -50,7 +50,7 @@
     		<td th:text="${entry.description}"></td>
     		<td th:text="${entry.workout.name}"></td>
     		<td th:text="${entry.user.username}"></td>
-    		<td><a class="btn btn-danger" th:href="@{/deletEntry/{id}(id=${entry.id})}">Delete</a></td>
+    		<td><a class="btn btn-danger" th:href="@{/deleteEntry/{id}(id=${entry.id})}">Delete</a></td>
     		<td><a class="btn btn-success" th:href="@{/editEntry/{id}(id=${entry.id})}">Edit</a></td>
     	</tr>
      </table>

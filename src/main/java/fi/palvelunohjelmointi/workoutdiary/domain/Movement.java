@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,7 +22,11 @@ public class Movement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
+	
+	@Min(1)
 	private int count;
+	
+	@NotEmpty
 	private String name;
 
 	@ManyToMany(mappedBy = "movements")

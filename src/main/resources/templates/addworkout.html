@@ -5,6 +5,7 @@
     <title>Workout diary</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="css/omattyylit.css" th:href="@{../css/omattyylit.css}" />
 </head>
 <body>
 	<h1>Add workout</h1>
@@ -16,6 +17,7 @@
 			  	</div>
 			  	<div class="col-md-3">
 					<input type="text" class="form-control" id="name" th:field="*{name}" />
+					<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">Error</div>
 			  	</div>
 			</div>
 			<br/>
@@ -30,6 +32,7 @@
 					            th:value="${movement.id}"
 					            th:text="${movement.name}">Part name</option>
 					</select>
+					<div th:if="${#fields.hasErrors('movements')}" th:errors="*{movements}" class="error">Error</div>
 			  	</div>
 			</div>
 			<br/>

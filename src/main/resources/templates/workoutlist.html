@@ -48,10 +48,10 @@
     		<td>
     			<div th:each = "movement : ${workout.movements}"><div th:text = "${movement.name}"></div></div>
     		</td>
-    		<td><a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:href="@{/deleteWorkout/{id}(id=${workout.id})}">Delete</a></td>
-    		<td><a sec:authorize="hasRole('ADMIN')" class="btn btn-success" th:href="@{/editWorkout/{id}(id=${workout.id})}">Edit</a></td>
+    		<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger" th:href="@{/deleteWorkout/{id}(id=${workout.id})}">Delete</a></td>
+    		<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/editWorkout/{id}(id=${workout.id})}">Edit</a></td>
     	</tr>
      </table>
-     <a sec:authorize="hasRole('ADMIN')" class="btn btn-success" href="/addWorkout">Add workout</a>
+     <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/addWorkout">Add workout</a>
 </body>
 </html>

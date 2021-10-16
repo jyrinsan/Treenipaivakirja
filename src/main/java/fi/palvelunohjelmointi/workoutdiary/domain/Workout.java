@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Workout {
@@ -19,11 +21,13 @@ public class Workout {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id; 
 	
+	@NotEmpty
 	private String name;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="workout")
 	private List<Entry> entries;
 	
+	@NotEmpty
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Workout_Movement",
 	    joinColumns = {
