@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary.domain;
+package fi.palvelinohjelmointi.workoutdiary.domain;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Workout {
@@ -28,21 +27,21 @@ public class Workout {
 	private List<Entry> entries;
 	
 	@NotEmpty
-	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Workout_Movement",
-	    joinColumns = {
-	        @JoinColumn(
-	            name = "workout_id",
-	            referencedColumnName = "id"
-	        )
-	    },
-	    inverseJoinColumns = {
-	        @JoinColumn(
-	            name = "movement_id",
-	            referencedColumnName = "id"
-	        )
-	    }
-    )
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Movement.class)
+    @JoinTable(name = "workout_movement",
+    joinColumns = {
+        @JoinColumn(
+            name = "workoutid",
+            referencedColumnName = "id"
+        )
+    },
+    inverseJoinColumns = {
+        @JoinColumn(
+            name = "movementid",
+            referencedColumnName = "id"
+        )
+    }
+)
 	private List<Movement> movements;
 
 	public Workout() {

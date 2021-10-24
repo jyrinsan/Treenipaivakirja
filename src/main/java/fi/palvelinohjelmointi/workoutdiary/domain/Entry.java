@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary.domain;
+package fi.palvelinohjelmointi.workoutdiary.domain;
 
 import java.time.LocalDate;
 

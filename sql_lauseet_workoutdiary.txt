@@ -1,0 +1,71 @@
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS entry; 
+DROP TABLE IF EXISTS movement; 
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS workout;
+DROP TABLE IF EXISTS workout_movement;
+SET FOREIGN_KEY_CHECKS=1;
+
+CREATE TABLE user
+(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+,username VARCHAR(255) NOT NULL
+,password VARCHAR(255) NOT NULL
+,role VARCHAR(255) NOT NULL
+);
+
+INSERT INTO user (username, password, role) VALUES ("user", "$2a$10$hfSLCP0welzxwZ/corOqA.wd3AIXUBeafL4L.T/gMliCbRlFbhdce", "USER");
+INSERT INTO user (username, password, role) VALUES ("admin", "$2a$10$rTiMhH7akolTCeEhuinTp.vcvqo9chv0hDQa665bMaTOlSOTAUQ1C", "ADMIN");
+
+CREATE TABLE movement (
+id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+,count INT NOT NULL
+,name VARCHAR(255)
+);
+
+INSERT INTO movement (count, name) VALUES (10, "maastaveto");
+INSERT INTO movement (count, name) VALUES (10, "rinnalleveto");
+INSERT INTO movement (count, name) VALUES (20, "burbee");
+INSERT INTO movement (count, name) VALUES (100, "hölkkä");
+
+CREATE TABLE workout
+(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+,name VARCHAR(255) NOT NULL
+);
+
+INSERT INTO workout (name) VALUES ("juoksutreeni");
+INSERT INTO workout (name) VALUES ("voimatreeni");
+INSERT INTO workout (name) VALUES ("sekatreeni");
+
+CREATE TABLE entry
+(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+,date DATE NOT NULL
+,description VARCHAR(255)
+,userid BIGINT
+,workoutid BIGINT NOT NULL
+,FOREIGN KEY (userid) REFERENCES user(id)
+,FOREIGN KEY (workoutid) REFERENCES workout(id)
+);
+
+INSERT INTO entry (date, description, userid, workoutid) VALUES (DATE '2021-10-17', "olipas kiva juoksutreeni", 1, 1);
+INSERT INTO entry (date, description, userid, workoutid) VALUES (DATE '2021-10-18', "olipas kiva voimatreeni", 1, 2);
+INSERT INTO entry (date, description, userid, workoutid) VALUES (DATE '2021-10-18', "admin voimailee", 2, 2);
+INSERT INTO entry (date, description, userid, workoutid) VALUES (DATE '2021-10-20', "admin sekoilee", 2, 3);
+
+CREATE TABLE workout_movement
+(movementid BIGINT NOT NULL
+,workoutid BIGINT NOT NULL
+,FOREIGN KEY (movementid) REFERENCES movement(id)
+,FOREIGN KEY (workoutid) REFERENCES workout(id)
+);
+
+INSERT INTO workout_movement (movementid, workoutid) VALUES (4, 1);
+INSERT INTO workout_movement (movementid, workoutid) VALUES (1, 2);
+INSERT INTO workout_movement (movementid, workoutid) VALUES (2, 2);
+INSERT INTO workout_movement (movementid, workoutid) VALUES (2, 3);
+INSERT INTO workout_movement (movementid, workoutid) VALUES (3, 3);
+
+SELECT * FROM entry;
+SELECT * FROM movement;
+SELECT * FROM user;
+SELECT * FROM workout;
+SELECT * FROM workout_movement;

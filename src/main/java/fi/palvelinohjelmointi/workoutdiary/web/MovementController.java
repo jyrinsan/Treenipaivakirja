@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary.web;
+package fi.palvelinohjelmointi.workoutdiary.web;
 
 import javax.validation.Valid;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fi.palvelunohjelmointi.workoutdiary.domain.Workout;
-import fi.palvelunohjelmointi.workoutdiary.domain.Movement;
-import fi.palvelunohjelmointi.workoutdiary.domain.MovementRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.Movement;
+import fi.palvelinohjelmointi.workoutdiary.domain.MovementRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.Workout;
 
 @Controller
 public class MovementController {

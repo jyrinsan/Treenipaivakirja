@@ -1,11 +1,9 @@
-package fi.palvelunohjelmointi.workoutdiary.domain;
-
-import java.util.List;
+package fi.palvelinohjelmointi.workoutdiary.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
 public interface WorkoutRepository extends CrudRepository<Workout, Long>{
-	List<Workout> findByName(String name);
+	Workout findByName(String name);
 
 }
 

@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary.domain;
+package fi.palvelinohjelmointi.workoutdiary.domain;
 
 import java.util.List;
 import java.util.Set;
@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -29,7 +30,7 @@ public class Movement {
 	@NotEmpty
 	private String name;
 
-	@ManyToMany(mappedBy = "movements")
+	@ManyToMany(targetEntity = Workout.class, mappedBy = "movements")
 	private List<Workout> workouts;
 	
 	public Movement() {

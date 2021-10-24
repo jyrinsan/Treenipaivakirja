@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary.web;
+package fi.palvelinohjelmointi.workoutdiary.web;
 
 import javax.validation.Valid;
 
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fi.palvelunohjelmointi.workoutdiary.domain.Entry;
-import fi.palvelunohjelmointi.workoutdiary.domain.EntryRepository;
-import fi.palvelunohjelmointi.workoutdiary.domain.User;
-import fi.palvelunohjelmointi.workoutdiary.domain.UserRepository;
-import fi.palvelunohjelmointi.workoutdiary.domain.WorkoutRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.Entry;
+import fi.palvelinohjelmointi.workoutdiary.domain.EntryRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.User;
+import fi.palvelinohjelmointi.workoutdiary.domain.UserRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.WorkoutRepository;
 
 @Controller
 public class EntryController {

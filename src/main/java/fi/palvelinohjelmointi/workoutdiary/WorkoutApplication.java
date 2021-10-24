@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary;
+package fi.palvelinohjelmointi.workoutdiary;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import fi.palvelunohjelmointi.workoutdiary.domain.Workout;
-import fi.palvelunohjelmointi.workoutdiary.domain.WorkoutRepository;
-import fi.palvelunohjelmointi.workoutdiary.domain.Entry;
-import fi.palvelunohjelmointi.workoutdiary.domain.EntryRepository;
-import fi.palvelunohjelmointi.workoutdiary.domain.Movement;
-import fi.palvelunohjelmointi.workoutdiary.domain.MovementRepository;
-import fi.palvelunohjelmointi.workoutdiary.domain.User;
-import fi.palvelunohjelmointi.workoutdiary.domain.UserRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.Entry;
+import fi.palvelinohjelmointi.workoutdiary.domain.EntryRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.Movement;
+import fi.palvelinohjelmointi.workoutdiary.domain.MovementRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.User;
+import fi.palvelinohjelmointi.workoutdiary.domain.UserRepository;
+import fi.palvelinohjelmointi.workoutdiary.domain.Workout;
+import fi.palvelinohjelmointi.workoutdiary.domain.WorkoutRepository;
 
 @SpringBootApplication
 public class WorkoutApplication {
@@ -27,7 +27,7 @@ public class WorkoutApplication {
 		SpringApplication.run(WorkoutApplication.class, args);
 	}
 	
-	@Bean
+	/*@Bean
 	public CommandLineRunner workoutDiary(EntryRepository eRepository, WorkoutRepository wRepository, MovementRepository mRepository, UserRepository uRepository) {
 		return (args) -> {	
 			
@@ -83,7 +83,7 @@ public class WorkoutApplication {
 
 
 		};
-	}
+	}*/
 
 
 }

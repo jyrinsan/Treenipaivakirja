@@ -1,4 +1,4 @@
-package fi.palvelunohjelmointi.workoutdiary;
+package fi.palvelinohjelmointi.workoutdiary;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import fi.palvelunohjelmointi.workoutdiary.web.UserDetailServiceImpl;
+import fi.palvelinohjelmointi.workoutdiary.web.UserDetailServiceImpl;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -24,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
         .and()
+        .authorizeRequests().antMatchers("/api/**").permitAll() // jotta postmanista ei tartteta autentikointia
+        .and()
         .authorizeRequests()
           .anyRequest().authenticated()
           .and()
@@ -33,10 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .and()
       .logout()
           .permitAll();
+
     }
     
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+    
+
 }
